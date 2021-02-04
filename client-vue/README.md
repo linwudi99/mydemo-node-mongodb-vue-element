@@ -1,4 +1,4 @@
-# vue-demo
+# client-vue
 
 ## Project setup
 ```
