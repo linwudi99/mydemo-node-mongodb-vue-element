@@ -2,9 +2,9 @@
 const router = require("express").Router();
 
 const passport = require("passport");
-const Profile = require('../models/Profile');
+const Profile = require('../../models/Profile');
 // 添加信息
-router.post("/profiles/add", passport.authenticate("jwt", {
+router.post("/add", passport.authenticate("jwt", {
   session: false
 }), (req, res) => {
   const newProfile = new Profile(req.body)
@@ -18,7 +18,7 @@ router.post("/profiles/add", passport.authenticate("jwt", {
   })
 })
 // 获取所有信息和按条件查询
-router.post("/profiles/list", passport.authenticate("jwt", {
+router.post("/list", passport.authenticate("jwt", {
   session: false
 }), (req, res) => {
   Profile.find(req.body,(err,data)=>{
@@ -31,7 +31,7 @@ router.post("/profiles/list", passport.authenticate("jwt", {
   })
 })
 // 获取单个信息 by id
-// router.get("/profiles/:id", passport.authenticate("jwt", {
+// router.get("/:id", passport.authenticate("jwt", {
 //   session: false
 // }), (req, res) => {
 //   Profile.findOne({_id:req.params.id},(err,data)=>{
@@ -44,7 +44,7 @@ router.post("/profiles/list", passport.authenticate("jwt", {
 //   })
 // })
 // 编辑信息
-router.post("/profiles/edit/:id", passport.authenticate("jwt", {
+router.post("/edit/:id", passport.authenticate("jwt", {
   session: false
 }), (req, res) => {
   Profile.findOneAndUpdate(
@@ -60,7 +60,7 @@ router.post("/profiles/edit/:id", passport.authenticate("jwt", {
     })
 })
 // 删除信息
-router.delete("/profiles/delete/:id", passport.authenticate("jwt", {
+router.delete("/delete/:id", passport.authenticate("jwt", {
   session: false
 }), (req, res) => {
   Profile.findByIdAndRemove(req.params.id,(err,data)=>{

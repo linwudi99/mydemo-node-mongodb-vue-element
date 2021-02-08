@@ -2,7 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
-const User = require('../models/User');
+const User = require('../../models/User');
 // 创建路由对象
 const router = express.Router();
 
@@ -39,6 +39,7 @@ router.post('/register', (req, res) => {
 
 // 登录 返回token jwt passport
 router.post('/login', (req, res) => {
+  console.log(req.body)
   const name = req.body.name;
   const password = req.body.password;
   // 查询数据库是否存在该用户

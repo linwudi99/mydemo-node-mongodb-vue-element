@@ -9,11 +9,17 @@
         <el-form-item label="邮箱" prop="email">
           <el-input v-model="formData.email" placeholder="请输入邮箱"></el-input>
         </el-form-item>
+        <el-form-item label="角色权限" prop="roleId">
+          <el-select v-model="formData.roleId" style="width:100%" placeholder="请选择角色权限">
+            <el-option value="1" label="管理员"></el-option>
+            <el-option value="0" label="普通用户"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input v-model="formData.password" placeholder="请输入密码"></el-input>
+          <el-input v-model="formData.password" placeholder="请输入密码" type="password"></el-input>
         </el-form-item>
         <el-form-item label="确认密码" prop="password2">
-          <el-input v-model="formData.password2" placeholder="请再次输入密码"></el-input>
+          <el-input v-model="formData.password2" placeholder="请再次输入密码" type="password"></el-input>
         </el-form-item>
         <el-form-item label-width="0">
           <el-button type="success" class="registerBtn" @click="registerHandle">注册</el-button>
@@ -28,9 +34,7 @@ export default {
   name: 'register',
   data() {
     var validatePwd2 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请再次输入密码'));
-      } else if (value !== this.formData.password) {
+      if (value !== this.formData.password) {
         callback(new Error('两次输入密码不一致!'));
       } else {
         callback();
@@ -40,15 +44,20 @@ export default {
       formData:{
         name:'',
         email:'',
+        roleId:'',
         password:'',
         password2:''
       },
       rules: {
         name: [
-          { required: true, message: '用户名必填', trigger: 'blur' }
+          { required: true, message: '用户名不能为空', trigger: 'blur' },
+          { min:2, max:20, message: '长度在2~20个字符之间', trigger: 'blur' },
         ],
         email: [
           { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+        ],
+        roleId: [
+          { required: true, message: '角色权限不能为空', trigger: 'change' }
         ],
         password: [
           { required: true, message: '密码不能为空', trigger: 'blur' }
@@ -64,15 +73,28 @@ export default {
   mounted() {},
   methods: {
     registerHandle(){
-
+      this.$refs['formData'].validate((valid) => {
+          if (valid) {
+            this.$axios.post("/api/register",this.formData).then(res=>{
+              this.$message.success('注册成功！')
+              this.$router.push('/login')
+            })
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+    },
+    resetForm() {
+      this.$refs['formData'].resetFields();
     }
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .register{
-  background-image: url('../assets/bg.jpg');
+  background-image: url('../assets/bg2.jpg');
   background-size: 100% 100%;
   height: 100%;
   display: flex;

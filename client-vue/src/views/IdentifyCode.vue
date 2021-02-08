@@ -5,7 +5,7 @@
 </template>
 <script>
 export default{
- name: 'identify',
+ name: 'identifyCode',
  props: {
   identifyCode: { // 默认注册码
    type: String,
