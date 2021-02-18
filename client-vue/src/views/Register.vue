@@ -75,7 +75,7 @@ export default {
     registerHandle(){
       this.$refs['formData'].validate((valid) => {
           if (valid) {
-            this.$axios.post("/api/register",this.formData).then(res=>{
+            this.$axios.post("/api/users/register",this.formData).then(res=>{
               this.$message.success('注册成功！')
               this.$router.push('/login')
             })

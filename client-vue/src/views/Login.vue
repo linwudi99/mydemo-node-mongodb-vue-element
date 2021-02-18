@@ -31,7 +31,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="success" class="loginBtn" @click="loginHandle">登录</el-button>
-          <p style="float:right">暂无账号，去<a @click="toRegister">注册</a>？</p>
+          <p style="float:right">还没有账号？去<router-link to='/register'>注册</router-link>。</p>
         </el-form-item>
         <!-- <svg aria-hidden="true">
           <use xlink:href="#icon-user"></use>
@@ -42,11 +42,12 @@
 </template>
 
 <script>
-import IdentifyCode from './IdentifyCode';
+import identifyCode from './IdentifyCode.vue';
+import jwt_decode from 'jwt-decode';
 export default {
   name: 'login',
   components: {
-    IdentifyCode
+    identifyCode
   },
   data() {
     return {
@@ -81,25 +82,37 @@ export default {
     },
     loginHandle() {
       this.$refs['formData'].validate((valid) => {
-        if (valid) {
+        if (this.formData.name && this.formData.password && this.formData.code) {
           if(this.formData.code == this.identifyCode){
-            this.$axios.post("/api/login",this.formData).then(res=>{
-              this.$message.success('登录成功！')
+            this.$axios.post("/api/users/login",this.formData).then(res=>{
+              // 存储token
+              const token = res.data.token
+              sessionStorage.setItem('eleToken',token)
+              // 解析token
+              const decodeToken = jwt_decode(token);
+              // console.log(decodeToken)
+              // 解析的token存储到vuex中，this.isEmpty(decodeToken)判断解析的token是否为空，为空传false，不为空传true
+              this.$store.dispatch('setAuthenticated', !this.isEmpty(decodeToken))
+              this.$store.dispatch('setUser', decodeToken)
+              
+              this.$message.success(res.data.msg)
               this.$router.push('/home')
             })
           }else{
             this.$message.error('验证码输入错误！')
-          }
-          
+          }         
         } else {
-          console.log('error submit!!');
-          return false;
+          this.$message.error('用户名、密码、验证码都不能为空！')
         }
       });
     },
-    // 去注册
-    toRegister() {
-      this.$router.push('./register')
+    isEmpty(value) {
+      return (
+        value === undefined ||
+        value === null ||
+        (typeof value === "object" && Object.keys(value).length === 0) ||
+        (typeof value === "string" && value.trim().length === 0)
+      );
     }
   },
 };

@@ -11,6 +11,12 @@ const profiles = require('./routers/api/profiles')
 
 // DB config
 const dbUrl = require("./config/dbUrl").dbUrl;
+
+// app.use(express.static('client-vue'));
+// 使用body-parser中间件
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 // 连接数据库
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
@@ -21,17 +27,17 @@ mongoose.connect(dbUrl, {
   console.log(err)
 })
 
-// app.use(express.static('www'));
-app.use(bodyParser.urlencoded({extended:true}));
 // 初始化passport
 app.use(passport.initialize());
 // 配置passport
 require("./config/passport")(passport);
 
 // 将路由模块作为中间件使用
-app.use("/api", users); // 注册接口：'/api/register'，登录接口：'/api/login'
+app.use("/api/users", users); // 注册接口：'/api/users/register'，登录接口：'/api/users/login'
 app.use("/api/profiles", profiles); // profiles增删改查接口：'/api/profiles/add(delete,edit,list)'
 
-app.listen(3001,()=>{
-  console.log('服务启动，端口号3001...')
+const port = process.env.PORT || 3001;
+
+app.listen(port,()=>{
+  console.log(`服务启动，端口号${port}...`)
 })

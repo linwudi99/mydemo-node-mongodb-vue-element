@@ -1,10 +1,11 @@
 const express = require("express");
+// 创建路由对象
+const router = express.Router();
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const User = require('../../models/User');
-// 创建路由对象
-const router = express.Router();
 
 // 注册
 router.post('/register', (req, res) => {

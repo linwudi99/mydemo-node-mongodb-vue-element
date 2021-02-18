@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    111
+    <header-nav></header-nav>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import headerNav from '@/components/HeaderNav.vue'
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    headerNav
   }
 }
 </script>

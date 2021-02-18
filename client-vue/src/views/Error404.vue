@@ -10,7 +10,7 @@ export default {
   name: 'error404',
   data() {
     return {
-      imgSrc:require("@assets/404.gif")
+      imgSrc:require("../assets/404.gif")
     };
   },
   created() {},
