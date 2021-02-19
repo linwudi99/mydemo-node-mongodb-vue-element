@@ -27,6 +27,26 @@ const routes = [
         name: 'personalInfo',
         component: () => import('@/views/personalInfo/personalInfo.vue')
       },
+      {
+        path: '/moneyList',
+        name: 'moneyList',
+        component: () => import('@/views/moneyManage/moneyList.vue')
+      },
+      {
+        path: '/moneyList2',
+        name: 'moneyList2',
+        component: () => import('@/views/moneyManage/moneyList2.vue')
+      },
+      {
+        path: '/userList',
+        name: 'userList',
+        component: () => import('@/views/userManage/userList.vue')
+      },
+      {
+        path: '/setting',
+        name: 'setting',
+        component: () => import('@/views/set/setting.vue')
+      },
     ]
   },
   {

@@ -4,28 +4,34 @@
       <img src="../assets/logo2.jpg" alt="">
       <span>资金管理</span>
     </div>    
-    <el-menu :default-openeds="['1', '2', '3']" background-color="#545c64" text-color="#fff" active-text-color="#4998FC">
-      <el-submenu index="1">
-        <template slot="title"><i class="el-icon-message"></i>导航一</template>
-        <el-menu-item-group>          
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu index="2">
-        <template slot="title"><i class="el-icon-menu"></i>导航二</template>
-        <el-menu-item-group>
-          <el-menu-item index="2-1">选项1</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu index="3">
-        <template slot="title"><i class="el-icon-setting"></i>导航三</template>
-        <el-menu-item-group>
-          <el-menu-item index="3-1">选项1</el-menu-item>
-          <el-menu-item index="3-2">选项2</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
+    <el-menu background-color="#545c64" text-color="#fff" active-text-color="#4998FC" default-active="0">
+      <router-link to="/container">
+        <el-menu-item index="0">
+          <i class="el-icon-menu"></i>
+          <span slot="title">首页</span>
+        </el-menu-item>
+        <template v-for="item in menus">
+          <!-- 有children的menu -->
+          <el-submenu v-if="item.children && item.children.length>0" :key="item.path" :index="item.path">
+            <template slot="title">
+              <i :class="item.icon"></i>
+              <span slot="title">{{item.label}}</span>
+            </template>
+            <router-link v-for="i in item.children" :key="i.path" :to="i.path">
+              <el-menu-item :index="i.path">
+                <span slot="title">{{i.label}}</span>
+              </el-menu-item>
+            </router-link>
+          </el-submenu>
+          <!-- 无children的menu -->
+          <router-link v-else :to="item.path">
+            <el-menu-item :index="item.path">
+              <i :class="item.icon"></i>
+              <span slot="title">{{item.label}}</span>
+            </el-menu-item>
+          </router-link>          
+        </template>
+      </router-link>
     </el-menu>
   </div>
 </template>
@@ -35,6 +41,31 @@ export default {
   name: 'asideMenu',
   data() {
     return {
+      menus:[
+        {
+          icon:"el-icon-s-goods",
+          label:"资金管理",
+          path:"moneyManage",
+          children:[
+            {path:"moneyList",label:"资金流水"},
+            {path:"moneyList2",label:"资金流水2"},
+          ]
+        },
+        {
+          icon:"el-icon-user-solid",
+          label:"用户管理",
+          path:"userManage",
+          children:[
+            {path:"userList",label:"用户信息"}
+          ]
+        },
+        {
+          icon:"el-icon-s-tools",
+          label:"个人设置",
+          path:"setting",
+          children:[]
+        },
+      ]
     };
   },
   created() {},

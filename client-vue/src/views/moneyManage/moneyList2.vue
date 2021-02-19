@@ -1,12 +1,10 @@
 <template>
-  <div>
-    container
-  </div>
+  <div>moneyList2</div>
 </template>
 
 <script>
 export default {
-  name: 'container',
+  name: 'moneyList2',
   data() {
     return {
     };

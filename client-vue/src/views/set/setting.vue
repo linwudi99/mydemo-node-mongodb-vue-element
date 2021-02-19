@@ -1,12 +1,10 @@
 <template>
-  <div>
-    container
-  </div>
+  <div>setting</div>
 </template>
 
 <script>
 export default {
-  name: 'container',
+  name: 'setting',
   data() {
     return {
     };
