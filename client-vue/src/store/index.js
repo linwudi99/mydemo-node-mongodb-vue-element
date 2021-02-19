@@ -32,6 +32,11 @@ const actions = {
   },
   setUser: ({commit},user) => {
     commit(types.SET_USER,user)
+  },
+  // 退出登录，清除当前状态
+  clearState: ({commit}) => {
+    commit(types.SET_AUTHENTICATED,false)
+    commit(types.SET_USER,null)
   }
 }
 

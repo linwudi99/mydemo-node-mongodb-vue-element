@@ -4,7 +4,7 @@ import axios from './api/http';
 import router from './router'
 import store from './store'
 import './plugins/element.js'
-import SvgIcon from './components/SvgIcon/index.vue'
+import SvgIcon from './components/SvgIcon.vue'
 
 // axios.defaults.baseURL = '/api'
 

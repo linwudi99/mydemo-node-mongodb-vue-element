@@ -18,7 +18,7 @@
           </el-input>
         </el-form-item>
         <el-form-item>
-          <el-input type="text" v-model="formData.code" placeholder="请输入验证码">
+          <el-input type="text" v-model="formData.code" placeholder="请输入验证码" @keyup.enter.native="loginHandle">
           <el-button slot="prepend">
             <svg-icon icon-class="anquan" />
           </el-button>

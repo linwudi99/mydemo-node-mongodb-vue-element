@@ -10,23 +10,39 @@ const routes = [
   },
   {
     path: '/home',
-    name: 'home',
-    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
+    // name: 'home',
+    component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/Container.vue')
+      },
+      {
+        path: '/container',
+        name: 'container',
+        component: () => import('@/views/Container.vue')
+      },
+      {
+        path: '/personalInfo',
+        name: 'personalInfo',
+        component: () => import('@/views/personalInfo/personalInfo.vue')
+      },
+    ]
   },
   {
     path: '/error404',
     name: 'error404',
-    component: () => import( /* webpackChunkName: "error404" */ '../views/Error404.vue')
+    component: () => import( /* webpackChunkName: "error404" */ '@/views/Error404.vue')
   },
   {
     path: '/register',
     name: 'register',
-    component: () => import( /* webpackChunkName: "register" */ '../views/Register.vue')
+    component: () => import( /* webpackChunkName: "register" */ '@/views/Register.vue')
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import( /* webpackChunkName: "login" */ '../views/Login.vue')
+    component: () => import( /* webpackChunkName: "login" */ '@/views/Login.vue')
   },
 ]
 
