@@ -64,7 +64,7 @@ router.post('/login', (req, res) => {
             email: user.email,
             roleId: user.roleId
           }
-          jwt.sign(rule, "secret", { expiresIn: 3600 }, (err, token) => {
+          jwt.sign(rule, "secret", { expiresIn: 36000 }, (err, token) => {
             if (err) throw err;
             res.json({
               code: 1,

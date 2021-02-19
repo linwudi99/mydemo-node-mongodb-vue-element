@@ -7,11 +7,20 @@ export default {
   name: 'moneyList',
   data() {
     return {
+      formData:{},
+      tableData:[]
     };
   },
-  created() {},
-  mounted() {},
-  methods: {},
+  mounted() {
+    this.getProfiles()
+  },
+  methods: {
+    getProfiles(){
+      this.$axios.post("/api/profiles/list",this.formData).then(res=>{
+        console.log(res.data)
+      }).catch(err=>{})
+    }
+  },
 };
 </script>
 

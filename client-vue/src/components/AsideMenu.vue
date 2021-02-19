@@ -2,7 +2,6 @@
   <div class="myAsideMenu">
     <div class="logo">
       <img src="../assets/logo2.jpg" alt="">
-      <span>资金管理</span>
     </div>    
     <el-menu background-color="#545c64" text-color="#fff" active-text-color="#4998FC" default-active="0">
       <router-link to="/container">
@@ -78,18 +77,9 @@ export default {
 .myAsideMenu{
   .logo{
     height: 60px;
-    background-color: #4998FC;
-    text-align: center;
     img{
-      height: 50px;
-      width: auto;
-      vertical-align: middle;
-      margin-top: 5px;
-    }
-    span{
-      vertical-align: middle;
-      margin-left: 10px;
-      color: #fff;
+      height: 60px;
+      width: 100%;   
     }
   }
 }
