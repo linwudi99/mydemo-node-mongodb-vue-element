@@ -13,9 +13,13 @@ function endLoading() {
   loading.close();
 }
 
-// 请求拦截
+// 请求拦截  
 axios.interceptors.request.use(config=>{
   startLoading();
+  // 设置统一header
+  if(sessionStorage.eleToken){
+    config.headers.Authorization = sessionStorage.eleToken
+  }
   return config;
 },err=>{
   return Promise.reject(err)
@@ -28,6 +32,14 @@ axios.interceptors.response.use(res => {
   // 错误提醒
   endLoading();
   Message.error(err.response.data)
+  // 401 token过期处理
+  const status = err.response
+  if(status==401){
+    Message.error('token已过期，请重新登录')
+    // 清除token，返回登录页面
+    sessionStorage.removeItem('eleToken')
+    router.push('/login')
+  }
   return Promise.reject(err)
 })
 
