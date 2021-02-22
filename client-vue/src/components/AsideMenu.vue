@@ -3,7 +3,7 @@
     <div class="logo">
       <img src="../assets/logo2.jpg" alt="">
     </div>    
-    <el-menu background-color="#545c64" text-color="#fff" active-text-color="#4998FC" default-active="0">
+    <el-menu background-color="#545c64" text-color="#fff" active-text-color="#5BC449" default-active="0">
       <router-link to="/container">
         <el-menu-item index="0">
           <i class="el-icon-menu"></i>

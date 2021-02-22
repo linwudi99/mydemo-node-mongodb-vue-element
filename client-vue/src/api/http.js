@@ -31,9 +31,9 @@ axios.interceptors.response.use(res => {
 }, err => {
   // 错误提醒
   endLoading();
-  Message.error(err.response.data)
+  Message.error(err.response.data.msg)
   // 401 token过期处理
-  const status = err.response
+  const status = err.response.status
   if(status==401){
     Message.error('token已过期，请重新登录')
     // 清除token，返回登录页面
