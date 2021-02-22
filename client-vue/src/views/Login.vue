@@ -130,6 +130,7 @@ export default {
     width:400px;
     background-color:cornsilk;
     opacity: 0.9;
+    text-align: center;
     .title{
       margin-bottom: 15px;
       font-size: 22px;

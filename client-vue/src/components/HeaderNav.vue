@@ -1,6 +1,6 @@
 <template>
   <div class="myHeaderNav">
-    <el-avatar icon="el-icon-user-solid"></el-avatar>
+    <el-avatar :src="avatarImg"></el-avatar>
     <el-dropdown trigger="click" @command="handleCommand">
       <span class="el-dropdown-link">
         {{userInfo.name}}
@@ -14,11 +14,12 @@
   </div>
 </template>
 
-<script>
+<script> 
 export default {
   name: 'headerNav',
   data() {
     return {
+      avatarImg:require('@/assets/avatar.jpg')
     };
   },
   computed:{

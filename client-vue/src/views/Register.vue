@@ -23,6 +23,7 @@
         </el-form-item>
         <el-form-item label-width="0">
           <el-button type="success" class="registerBtn" @click="registerHandle">注册</el-button>
+          <p style="float:right">已有账号，去<router-link to='/login'>登录</router-link>。</p>
         </el-form-item>
       </el-form>
     </el-card>
@@ -104,6 +105,7 @@ export default {
     width:400px;
     background-color:cornsilk;
     opacity: 0.9;
+    text-align: center;
     .title{
       margin-bottom: 15px;
       font-size: 22px;
